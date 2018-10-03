@@ -19,7 +19,7 @@ class ModelDimensionDesc;
 class DataModelDesc
 {
 public:
-	DataModelDesc();
+	DataModelDesc(const std::string & modelJsonPath, const std::string & tableJsonPath);
 	~DataModelDesc();
 	std::string getName();
 	// std::string getOwner();

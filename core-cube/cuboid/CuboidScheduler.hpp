@@ -4,7 +4,13 @@
 #include <utility>
 #include <math.h>
 
-#include "kylin/cubeDesc.hpp"
+#include <string>
+#include <list>
+#include <set>
+#include <map>
+
+
+#include "core-cube/model/CubeDesc.hpp"
 
 class CuboidScheduler
 {
@@ -17,8 +23,9 @@ public:
 	bool isValid(long requestCuboid);
 	long findBestMatchCuboid(long cuboid);
 	long findBestMatchCuboid1(long cuboid);
-	std::pair<std::set<long>, std::map<long, std::list<long>>> buildTreeBottomUp();
 
+protected:
+	std::pair<std::set<long>, std::map<long, std::list<long>>> buildTreeBottomUp();
 
 private:
 	long max;
@@ -30,4 +37,5 @@ private:
 	std::set<long> getOnTreeParentsByLayer(std::set<long> children);
 	std::set<long> getLowestCuboids();
 	std::set<long> getOnTreeParents(long child, std::set<AggregationGroup *> groups);
+
 };

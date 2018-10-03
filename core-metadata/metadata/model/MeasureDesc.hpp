@@ -1,17 +1,17 @@
+#ifndef _MEASURE_DESC_H
+#define _MEASURE_DESC_H 
+
 #include <string>
 
-#include "nlohmann/json.hpp"
-#include "kylin/functionDesc.hpp"
-
-using json = nlohmann::json;
+#include "FunctionDesc.h"
 
 class MeasureDesc
 {
 public:
-	MeasureDesc(std::string name. FunctionDesc * function);
+	MeasureDesc(const std::string & name. FunctionDesc * function);
 	~MeasureDesc();
 	std::string getName();
-	void setName(std::string name);
+	void setName(const std::string & name);
 	FunctionDesc * getFunction();
 	void setFunction(FunctionDesc * function);
 	
@@ -19,3 +19,5 @@ private:
 	std::string name;
 	FunctionDesc * function;
 };
+
+#endif

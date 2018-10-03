@@ -6,7 +6,6 @@
 #include <vector>
 #include <list>
 #include <set>
-#include <string>
 
 #include "nlohmann/json.hpp"
 #include "DataModelDesc.hpp"
@@ -17,7 +16,7 @@ using json = nlohmann::json;
 class CubeDesc
 {
 public:
-	CubeDesc();
+	CubeDesc(const std::string & cubeDescJsonPath);
 	~CubeDesc();
 	std::string getName();
 	void setName(std::string name);
