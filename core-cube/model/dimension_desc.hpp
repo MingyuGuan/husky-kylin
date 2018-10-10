@@ -14,23 +14,34 @@
 
 #pragma once
 
-#include <cinttypes>
+#include <string>
 #include <vector>
 
+#include "core-metadata/metadata/model/table_ref.hpp"
+#include "core-metadata/metadata/model/tbl_col_ref.hpp"
+
 namespace husky {
-namespace utils {
+namespace cube {
 
-std::vector<unsigned char> int_to_bytes(int param_int);
+class DimensionDesc {
+   public:
+    DimensionDesc(const std::string& name, const std::string& table, const std::string& column);
+    ~DimensionDesc() {}
 
-int bytes_to_int(const std::vector<unsigned char>& bytes);
+   private:
+    // from json
+    std::string name_;
+    std::string table_;
+    std::string column_;
 
-std::vector<unsigned char> long_to_bytes(uint64_t param_long);
+    // std::vector<std::string> derived;
 
-uint64_t bytes_to_long(const std::vector<unsigned char>& bytes);
+    // computed attributes
+    TableRef* table_ref_;
+    TblColRef* column_ref_;  // suppose no derived columns
 
-void write_long(uint64_t num, std::vector<unsigned char>& bytes, int offset, int size);
+    // std::vector<TblColRef* > columnRefs;
+};
 
-uint64_t read_long(const std::vector<unsigned char>& bytes, int offset, int size);
-
-}  // namespace utils
+}  // namespace cube
 }  // namespace husky

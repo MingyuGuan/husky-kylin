@@ -14,23 +14,25 @@
 
 #pragma once
 
-#include <cinttypes>
-#include <vector>
+#include <string>
 
 namespace husky {
-namespace utils {
+namespace cube {
 
-std::vector<unsigned char> int_to_bytes(int param_int);
+class ColumnDesc {
+   public:
+    ColumnDesc(const std::string& id, const std::string& name, const std::string& datatype);
+    ~ColumnDesc() {}
 
-int bytes_to_int(const std::vector<unsigned char>& bytes);
+    inline const std::string& get_id() const { return id_; }
+    inline const std::string& get_name() const { return name_; }
+    inline const std::string& get_data_type() const { return data_type_; }
 
-std::vector<unsigned char> long_to_bytes(uint64_t param_long);
+   private:
+    std::string id_;
+    std::string name_;
+    std::string data_type_;
+};
 
-uint64_t bytes_to_long(const std::vector<unsigned char>& bytes);
-
-void write_long(uint64_t num, std::vector<unsigned char>& bytes, int offset, int size);
-
-uint64_t read_long(const std::vector<unsigned char>& bytes, int offset, int size);
-
-}  // namespace utils
+}  // namespace cube
 }  // namespace husky

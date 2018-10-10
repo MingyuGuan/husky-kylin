@@ -12,25 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include "core-metadata/metadata/model/measure_desc.hpp"
 
-#include <cinttypes>
-#include <vector>
+#include <memory>
+#include <string>
+
+#include "core-metadata/metadata/model/function_desc.hpp"
 
 namespace husky {
-namespace utils {
+namespace cube {
 
-std::vector<unsigned char> int_to_bytes(int param_int);
+MeasureDesc::MeasureDesc(const std::string& name, std::shared_ptr<FunctionDesc>& function)
+    : name_(name), function_(function) {
+    // string cubeDescJsonPath = "cube_desc.json"; // should be in hdfs
+    // std::ifstream ifs(cubeDescJsonPath);
+    // json j = json::parse(ifs);
+}
 
-int bytes_to_int(const std::vector<unsigned char>& bytes);
-
-std::vector<unsigned char> long_to_bytes(uint64_t param_long);
-
-uint64_t bytes_to_long(const std::vector<unsigned char>& bytes);
-
-void write_long(uint64_t num, std::vector<unsigned char>& bytes, int offset, int size);
-
-uint64_t read_long(const std::vector<unsigned char>& bytes, int offset, int size);
-
-}  // namespace utils
+}  // namespace cube
 }  // namespace husky

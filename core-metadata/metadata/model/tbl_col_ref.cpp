@@ -12,25 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include "core-metadata/metadata/model/tbl_col_ref.hpp"
 
-#include <cinttypes>
-#include <vector>
+#include <string>
+
+#include "core-metadata/metadata/model/column_desc.hpp"
+#include "core-metadata/metadata/model/table_ref.hpp"
 
 namespace husky {
-namespace utils {
+namespace cube {
 
-std::vector<unsigned char> int_to_bytes(int param_int);
+TblColRef::TblColRef(ColumnDesc* column) { this->column_ = column; }
 
-int bytes_to_int(const std::vector<unsigned char>& bytes);
+TblColRef::TblColRef(TableRef* table, ColumnDesc* column) : table_(table), column_(column) {
+    this->identity_ = get_table_alias() + "." + get_name();
+}
 
-std::vector<unsigned char> long_to_bytes(uint64_t param_long);
+const std::string& TblColRef::get_table_alias() const { return table_->get_alias(); }
 
-uint64_t bytes_to_long(const std::vector<unsigned char>& bytes);
-
-void write_long(uint64_t num, std::vector<unsigned char>& bytes, int offset, int size);
-
-uint64_t read_long(const std::vector<unsigned char>& bytes, int offset, int size);
-
-}  // namespace utils
+}  // namespace cube
 }  // namespace husky

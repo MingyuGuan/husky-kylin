@@ -1,3 +1,4 @@
+
 // Copyright 2018 Husky Team
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,25 +13,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include "core-metadata/metadata/model/column_desc.hpp"
 
-#include <cinttypes>
-#include <vector>
+#include <string>
 
 namespace husky {
-namespace utils {
+namespace cube {
 
-std::vector<unsigned char> int_to_bytes(int param_int);
+ColumnDesc::ColumnDesc(const std::string& id, const std::string& name, const std::string& datatype)
+    : id_(id), name_(name), data_type_(datatype) {}
 
-int bytes_to_int(const std::vector<unsigned char>& bytes);
-
-std::vector<unsigned char> long_to_bytes(uint64_t param_long);
-
-uint64_t bytes_to_long(const std::vector<unsigned char>& bytes);
-
-void write_long(uint64_t num, std::vector<unsigned char>& bytes, int offset, int size);
-
-uint64_t read_long(const std::vector<unsigned char>& bytes, int offset, int size);
-
-}  // namespace utils
+}  // namespace cube
 }  // namespace husky

@@ -12,25 +12,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
+#include "core-metadata/metadata/model/model_dimension_desc.hpp"
 
-#include <cinttypes>
+#include <string>
 #include <vector>
 
+#include "boost/algorithm/string.hpp"
+
+// #include "core-metadata/metadata/model/data_model_desc.hpp"
+
 namespace husky {
-namespace utils {
+namespace cube {
 
-std::vector<unsigned char> int_to_bytes(int param_int);
+ModelDimensionDesc::ModelDimensionDesc(const std::string& table, const std::vector<std::string>& columns)
+    : table_(table), columns_(columns) {
+    boost::to_upper(table_);
+}
 
-int bytes_to_int(const std::vector<unsigned char>& bytes);
+// void ModelDimensionDesc::init(DataModelDesc * model) {
+//  boost::toupper(table);
+// }
 
-std::vector<unsigned char> long_to_bytes(uint64_t param_long);
-
-uint64_t bytes_to_long(const std::vector<unsigned char>& bytes);
-
-void write_long(uint64_t num, std::vector<unsigned char>& bytes, int offset, int size);
-
-uint64_t read_long(const std::vector<unsigned char>& bytes, int offset, int size);
-
-}  // namespace utils
+}  // namespace cube
 }  // namespace husky
