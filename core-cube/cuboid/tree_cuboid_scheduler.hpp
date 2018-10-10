@@ -21,8 +21,8 @@
 #include <utility>
 #include <vector>
 
-// #include "core-cube/model/cube_desc.hpp"
-// #include "core-cube/model/cuboid.hpp"
+#include "core-cube/model/cube_desc.hpp"
+#include "core-cube/model/cuboid.hpp"
 #include "core-cube/cuboid/cuboid_scheduler_base.hpp"
 
 namespace husky {
@@ -85,11 +85,10 @@ class TreeCuboidScheduler : public CuboidSchedulerBase {
     ~TreeCuboidScheduler() {}
 
     inline std::set<uint64_t> get_all_cuboid_ids() const override { return cuboid_tree_.get_all_cuboid_ids(); }
-    // inline int get_cuboid_count() const { return
-    // cuboid_tree_.get_cuboid_count(Cuboid.get_base_cuboid_id(cube_desc_))}
-    inline int get_cuboid_count() const override {
-        return cuboid_tree_.get_cuboid_count(31);
-    }  // hard code - [base cuboids id:] 11111(binary)
+    inline int get_cuboid_count() const { return cuboid_tree_.get_cuboid_count(Cuboid.get_base_cuboid_id(cube_desc_))}
+    // inline int get_cuboid_count() const override {
+    //     return cuboid_tree_.get_cuboid_count(31);
+    // }  // hard code - [base cuboids id:] 11111(binary)
     inline std::vector<uint64_t> get_spanning_cuboid(uint64_t cuboid_id) const override {
         return cuboid_tree_.get_spanning_cuboid(cuboid_id);
     }

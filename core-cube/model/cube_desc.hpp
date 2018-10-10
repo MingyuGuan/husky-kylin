@@ -28,6 +28,7 @@
 #include "core-metadata/metadata/model/data_model_desc.hpp"
 #include "core-metadata/metadata/model/measure_desc.hpp"
 #include "core-metadata/metadata/model/parameter_desc.hpp"
+#include "core-cube/model/cube_desc.hpp"
 
 namespace husky {
 namespace cube {
@@ -45,10 +46,14 @@ class CubeDesc {
     inline const std::string& get_name() const { return name_; }
     inline const std::string& get_model_name() { return model_name_; }
     inline const DataModelDesc& get_model() const { return *model_; }
-    inline DataModelDesc& get_model() { return *model_; }
-    inline std::shared_ptr<RowKeyDesc> get_row_key() { return row_key_; }
-    inline std::list<AggregationGroup*> get_aggregation_groups() { return std::list<AggregationGroup*>(); }
-
+    inline DataModelDesc& get_model() const { return *model_; }
+    inline std::shared_ptr<RowKeyDesc> get_row_key() const { return row_key_; }
+    inline std::list<AggregationGroup*> get_aggregation_groups() const { return std::list<AggregationGroup*>(); }
+    inline CuboidScheduler * get_initial_cuboid_scheduler() const {
+        if(cuboid_scheduler_ == NULL)
+            cuboid_scheduler_ =  new TreeCuboidScheduler();
+        return cuboid_scheduler_;
+    }
     /* Setters */
     inline void set_name(const std::string& name) { name_ = name; }
     inline void set_model_name(const std::string& model_name) { model_name_ = model_name; }
@@ -63,6 +68,7 @@ class CubeDesc {
     std::shared_ptr<RowKeyDesc> row_key_;
     std::vector<DimensionDesc> dimensions_;
     std::vector<MeasureDesc> measures_;
+    CuboidScheduler * cuboid_scheduler_;
     int parent_forward_ = 3;
     uint64_t partition_date_start_ = 0L;
     uint64_t partition_date_end_ = 3153600000000L;
